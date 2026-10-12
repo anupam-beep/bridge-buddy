@@ -1,0 +1,40 @@
+{
+  "skill_id": "CIVIL_NX_OFFLINE_CAPTURE_READINESS_CANDIDATE_V1",
+  "lifecycle": "CANDIDATE_ONLY",
+  "certification": "NOT_CERTIFIED",
+  "source_trace": {
+    "kind": "offline_candidate_bundle",
+    "reference": "BridgeAgent V4.58 candidate/offline_midas_probe_audit.py",
+    "source_sha256": "6432b0356c09f82fc28ff96cd45ac0115e5a512ae0c7d4fd57c738f4a89d194b",
+    "note": "SHA identifies the ZIP bundle, not an independently authenticated vendor specification."
+  },
+  "approved_manuals_ingested": 0,
+  "rules": [
+    "Inspect only isolated local file metadata; never access Civil NX or upload captured contents.",
+    "Use seven candidate capture filenames, not the previous invented placeholder names.",
+    "Missing, empty, oversized, nonregular or symlinked files produce HOLD.",
+    "All seven files present means content unverified, never result extraction verified.",
+    "Keep engineering acceptance and certification false regardless of file presence."
+  ],
+  "dojo": "tests/test_capture_readiness.py",
+  "independent_checks": "scripts/independent_capture_audit.py independently recomputes metadata status and rejects forged counts, certification, and status; not content/provenance verification.",
+  "errors": [
+    {
+      "id": "EVIDENCE_CONTRACT_PLACEHOLDER_MISMATCH",
+      "observed": "Initial GitHub health check listed seven placeholder names inconsistent with the V4.58 candidate probe audit.",
+      "correction": "Replace placeholder names with candidate probe-audit filenames and mark contract NOT_VENDOR_VALIDATED.",
+      "root_cause": "Starter implementation used placeholder labels before candidate bundle inspection.",
+      "severity": "medium",
+      "resolved_in_candidate": true
+    }
+  ],
+  "safety_locks": {
+    "civil_nx_network": false,
+    "model_write": false,
+    "model_save": false,
+    "solver_rerun": false,
+    "auto_promotion": false,
+    "engineering_acceptance": false
+  },
+  "next_priority": "Isolated native Windows PowerShell 5.1 synthetic handoff verification; original captures remain unavailable."
+}
