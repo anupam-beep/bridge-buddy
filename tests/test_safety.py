@@ -1,4 +1,4 @@
-﻿import pathlib
+import pathlib
 import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -16,7 +16,8 @@ class SafetyTests(unittest.TestCase):
     def test_health_script_declares_uncertified(self):
         data = (ROOT / 'scripts/offline_health.py').read_text(encoding='utf-8-sig')
         self.assertIn('NOT_CERTIFIED', data)
-        self.assertIn('PLACEHOLDER_NOT_VALIDATED', data)
+        self.assertIn('V458_CANDIDATE_NOT_VENDOR_VALIDATED', data)
+        self.assertIn('evidence_capture_scanned', data)
 
 if __name__ == '__main__':
     unittest.main()
